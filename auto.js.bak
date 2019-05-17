@@ -1,0 +1,22 @@
+window.onload = () => {
+    var code = localStorage.getItem('radarKey');
+    if (code === null || code === undefined) {
+        alert('您已成功激活！');
+        //window.location.href = './index.html'
+    } else {
+        primary(res => {
+            axios.post('http://101.132.32.11:8080/api/check', {
+                code,
+                devId: res
+            }).then(resp => {
+                var data = resp.data;
+                if (data.code == 200) {
+                    alert('您已成功激活！');
+                    //window.location.href = './index.html';
+                    localStorage.removeItem('radarKey');
+                } else {
+                }
+            });
+        })
+    }
+};
